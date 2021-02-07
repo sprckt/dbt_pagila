@@ -1,0 +1,12 @@
+local-dev:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: pagila_db
+      user: postgres
+      pass: postgres
+      port: 5432
+      dbname: pagila
+      schema: public
+      threads: 4

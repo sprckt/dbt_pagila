@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  dbt:
+    build: .
+    container_name: dbt_app
+    volumes:
+      - ./transforms:/app
+    networks:
+      - dbt_pagila_net
+    command: ["/bin/bash"]
+    depends_on:
+      - pagila_db
+
+  pagila_db:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: pagila_db
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - dbt_pagila_net
+
+networks:
+  dbt_pagila_net:
+    name: dbt_pagila_net
